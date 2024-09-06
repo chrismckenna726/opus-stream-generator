@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+
+  opus-generator-rtsp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: testing/opus-stream-generator
+    volumes:
+      - ./:/code
+    # depends_on:
+    #   - mediamtx
+    network_mode: host
+    environment:
+      - NUM_STREAMS=10
+      - SINK_TYPE=rtsp
+      - RTSP_SERVER=192.168.1.103:18554
+
+  # opus-generator-rtp:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: testing/opus-stream-generator
+  #   volumes:
+  #     - ./:/code
+  #   environment:
+  #     - NUM_STREAMS=10
+  #     - SINK_TYPE=rtp
+  #     - SINK_HOST=1.2.3.4
+  #     - SINK_START_PORT=10000
+
+  # mediamtx:
+  #   image: bluenviron/mediamtx:0.23.5
+  #   network_mode: host
